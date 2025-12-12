@@ -1,4 +1,4 @@
-# groupB_sustainability_society
+# Group B_Recycling Website_Sustainability Society
 
 This repository contains a web-based project for the Sustainability Society, including an interactive quiz and simple games to educate users about sustainability topics. The project is built with **HTML**, **CSS**, and **JavaScript**.
 
@@ -35,5 +35,6 @@ This repository contains a web-based project for the Sustainability Society, inc
 
 - All file paths are relative, so the project should work properly when hosted on GitHub Pages.
 - Ensure all files remain in the same folder structure as uploaded:
+
 
 
