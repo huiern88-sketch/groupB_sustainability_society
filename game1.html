@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Recycling Game</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+
+<body>
+
+    <body>
+
+        <!-- 🌿 Banner Image ABOVE Header -->
+        <div class="banner">
+            <img src="Pictures/header banner.png" alt="Eco Banner">
+        </div>
+
+        <!-- 🌿 Existing Header Navigation -->
+        <header>
+            <nav>
+                <a href="index1.html">Home</a>
+                <a href="quiz1.html">Quiz</a>
+                <a href="game1.html">Recycling Game</a>
+            </nav>
+        </header>
+
+        <section class="content">
+            <!-- your content here -->
+        </section>
+
+    </body>
+
+    <section class="content">
+        <h2>♻ Recycling Sorting Game</h2>
+
+        <div id="gameArea"></div>
+
+        <div id="binsWrapper">
+            <div class="bin metal" data-type="metal">Metal</div>
+            <div class="bin paper" data-type="paper">Paper</div>
+            <div class="bin glass" data-type="glass">Glass</div>
+        </div>
+
+        <h3>Score: <span id="score">0</span></h3>
+        <h3>Time Left: <span id="time">20</span>s</h3>
+
+        <button onclick="startGame()">Start Game</button>
+    </section>
+
+    <script src="script1.js"></script>
+</body>
+
+</html>
