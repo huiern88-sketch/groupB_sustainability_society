@@ -181,7 +181,80 @@ hr {
     background: #4da6ff;
 }
 
+/* ---------------- MOBILE FRIENDLY FIXES ---------------- */
+@media (max-width: 600px) {
+
+    /* Banner becomes full-width on mobile */
+    .banner {
+        padding: 8px 0;
+    }
+
+    .banner img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Navigation becomes closer together */
+    nav {
+        gap: 20px;
+    }
+
+    nav a {
+        font-size: 16px;
+    }
+
+    /* Content padding adjusts */
+    .content {
+        padding: 15px;
+    }
+
+    /* Recycle grid becomes 1-column */
+    .recycle-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Cards spacing */
+    .recycle-card {
+        padding: 12px;
+    }
+
+    /* Quiz questions fit screen */
+    .question-box {
+        padding: 12px;
+    }
+
+    /* Submit button spacing */
+    #submitBtn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    /* Game area responsive */
+    #gameArea {
+        height: 220px;
+    }
+
+    .item {
+        width: 50px;
+        height: 50px;
+    }
+
+    /* Bins shrink for phone */
+    #binsWrapper {
+        gap: 6px;
+    }
+
+    .bin {
+        font-size: 16px;
+        height: 90px;
+    }
+}
+
+
 /* Blue */
 .bin.glass {
     background: #66cc66;
+
 }
