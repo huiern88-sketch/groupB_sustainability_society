@@ -45,7 +45,7 @@ const questions = [
         options: [
             "Cardboard boxes",
             "Glass bottles",
-            "Plastic bags (like grocery bags)",
+            "Non-degradable plastic bags",
             "Aluminum foil"
         ],
         correct: [2],
@@ -286,4 +286,5 @@ function checkDrop(item) {
         }
     });
 }
+
 
