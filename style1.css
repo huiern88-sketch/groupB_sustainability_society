@@ -172,13 +172,20 @@ hr {
 }
 
 /* Bin colors */
+/* Yellow */
 .bin.metal {
-    background: #ff6666;
+    background: ##ffae42;
 }
 
-/* Red */
+/* Blue */
 .bin.paper {
-    background: #4da6ff;
+    background: #1338be;
+}
+
+/* Brown */
+.bin.glass {
+    background: #7b3f00;
+
 }
 
 /* ---------------- MOBILE FRIENDLY FIXES ---------------- */
@@ -252,9 +259,3 @@ hr {
     }
 }
 
-
-/* Blue */
-.bin.glass {
-    background: #66cc66;
-
-}
