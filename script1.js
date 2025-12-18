@@ -5,94 +5,158 @@ let gameRunning = false;
 let currentItem = null;
 
 // 10 Questions for the Quiz
+// ---------------- QUIZ DATA ----------------
 const questions = [
     {
-        q: "Which of the following items can be recycled?",
-        a: ["Plastic bottle", "Food waste", "Ceramic plate", "Tissue paper"],
-        correct: 0
+        q: "What does recycling mean?",
+        options: [
+            "Throwing things in the trash forever",
+            "Turning old things into new things",
+            "Burning everything to make energy",
+            "Buying more new stuff"
+        ],
+        correct: [1],
+        explanation: "Recycling turns used items into new products to save resources and reduce waste."
     },
     {
-        q: "What bin should paper go into?",
-        a: ["Plastic Bin", "Metal Bin", "Paper Bin", "Glass Bin"],
-        correct: 2
+        q: "What percentage of aluminum cans are recyclable?",
+        options: [
+            "20%",
+            "50%",
+            "100%",
+            "Aluminum cans aren’t recyclable"
+        ],
+        correct: [2],
+        explanation: "Aluminum can be recycled repeatedly without losing quality."
     },
     {
-        q: "Which action is BEST for the environment?",
-        a: ["Reuse items", "Throw everything", "Burn waste", "Use only plastic"],
-        correct: 0
+        q: "Which of these are usually recyclable?",
+        options: [
+            "Dirty food wrappers",
+            "Empty plastic bottles",
+            "Broken glass toys",
+            "Used tissues"
+        ],
+        correct: [1],
+        explanation: "Clean, empty plastic bottles are commonly accepted in recycling programs."
     },
     {
-        q: "Recycling helps reduce:",
-        a: ["Air pollution", "Noise", "Earthquakes", "Tides"],
-        correct: 0
+        q: "Which of these items is generally NOT accepted in curbside recycling programs?",
+        options: [
+            "Cardboard boxes",
+            "Glass bottles",
+            "Plastic bags (like grocery bags)",
+            "Aluminum foil"
+        ],
+        correct: [2],
+        explanation: "Plastic bags can jam recycling machines and usually need special drop-off locations."
     },
     {
-        q: "Metal cans are usually made from:",
-        a: ["Gold", "Aluminium", "Wood", "Rubber"],
-        correct: 1
+        q: "Which energy source is environmentally friendly?",
+        options: ["Coal", "Oil", "Wind", "Diesel"],
+        correct: [2],
+        explanation: "Wind energy is renewable and produces no air pollution."
     },
     {
-        q: "Glass can be recycled:",
-        a: ["Only once", "Many times", "Never", "Only if broken"],
-        correct: 1
+        q: "Which of the following actions helps reduce air pollution?",
+        options: [
+            "Burning waste",
+            "Using private cars daily",
+            "Using public transportation",
+            "Cutting down trees"
+        ],
+        correct: [2],
+        explanation: "Public transportation reduces the number of vehicles and emissions."
     },
     {
-        q: "Which is a recyclable paper item?",
-        a: ["Greasy pizza box", "Newspaper", "Wet tissue", "Used napkin"],
-        correct: 1
+        q: "True or False: You should leave the caps on plastic bottles when recycling them.",
+        options: [
+            "False (caps were removed historically)",
+            "True (modern technology can process bottle and cap together)"
+        ],
+        correct: [1],
+        explanation: "Modern recycling systems can process caps together with bottles."
     },
     {
-        q: "Recycling saves:",
-        a: ["Energy", "Nothing", "Water only", "Trees only"],
-        correct: 0
+        q: "When is World Environment Day celebrated?",
+        options: ["April 22", "May 5", "June 5", "July 1"],
+        correct: [2],
+        explanation: "World Environment Day is celebrated every year on June 5."
     },
     {
-        q: "Which symbol represents recycling?",
-        a: ["⚠️", "♻️", "❌", "⭐"],
-        correct: 1
+        q: "Choose TWO correct statements about student roles in sustainability at Taman Tasik Cyber.",
+        options: [
+            "Students can help sustainability by maintaining cleanliness",
+            "Student actions have no impact on public behavior",
+            "Responsible use of public spaces supports sustainability",
+            "Environmental care is solely the responsibility of authorities"
+        ],
+        correct: [0, 2],
+        explanation: "Students play a key role by maintaining cleanliness and using public spaces responsibly."
     },
     {
-        q: "Plastic bottles should be recycled after:",
-        a: ["Burning them", "Crushing them", "Throwing in nature", "Throwing into the ocean"],
-        correct: 1
+        q: "How does Taman Tasik Cyber MOST contribute to sustainability beyond environmental benefits? (Choose TWO)",
+        options: [
+            "It supports social sustainability by providing shared spaces",
+            "It weakens sustainability by prioritizing leisure",
+            "It promotes responsibility among students and the public",
+            "It has limited value because sustainability must be taught formally"
+        ],
+        correct: [0, 2],
+        explanation: "Shared spaces and community responsibility strengthen social sustainability."
     }
 ];
 
-// Generate Quiz Using Loop
+// ---------------- GENERATE QUIZ ----------------
 const container = document.getElementById("quiz-container");
 
 questions.forEach((item, index) => {
-    let qBox = document.createElement("div");
-    qBox.classList.add("question-box");
+    const box = document.createElement("div");
+    box.className = "question-box";
 
-    let questionHTML = `<h3>${index + 1}. ${item.q}</h3>`;
+    let html = `<h3>${index + 1}. ${item.q}</h3>`;
 
-    item.a.forEach((option, i) => {
-        questionHTML += `
+    item.options.forEach((opt, i) => {
+        const type = item.correct.length > 1 ? "checkbox" : "radio";
+        html += `
             <label class="option">
-                <input type="radio" name="q${index}" value="${i}">
-                ${String.fromCharCode(65 + i)}. ${option}
+                <input type="${type}" name="q${index}" value="${i}">
+                ${String.fromCharCode(65 + i)}. ${opt}
             </label>
         `;
     });
 
-    qBox.innerHTML = questionHTML;
-    container.appendChild(qBox);
+    html += `<p class="feedback" id="feedback${index}"></p>`;
+    box.innerHTML = html;
+    container.appendChild(box);
 });
 
-// Submit Quiz
+// ---------------- SUBMIT QUIZ ----------------
 document.getElementById("submitBtn").addEventListener("click", () => {
     let score = 0;
 
     questions.forEach((item, index) => {
-        let selected = document.querySelector(`input[name="q${index}"]:checked`);
-        if (selected && parseInt(selected.value) === item.correct) {
+        const selected = [...document.querySelectorAll(`input[name="q${index}"]:checked`)]
+            .map(input => parseInt(input.value));
+
+        const feedback = document.getElementById(`feedback${index}`);
+
+        if (
+            selected.length === item.correct.length &&
+            selected.every(v => item.correct.includes(v))
+        ) {
             score++;
+            feedback.innerHTML = "✅ Correct! " + item.explanation;
+            feedback.style.color = "green";
+        } else {
+            feedback.innerHTML = "❌ Incorrect. " + item.explanation;
+            feedback.style.color = "red";
         }
     });
 
     document.getElementById("result").innerHTML = `Your Score: ${score} / 10`;
 });
+
 
 
 
@@ -222,3 +286,4 @@ function checkDrop(item) {
         }
     });
 }
+
