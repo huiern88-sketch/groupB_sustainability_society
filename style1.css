@@ -174,7 +174,7 @@ hr {
 /* Bin colors */
 /* Yellow */
 .bin.metal {
-    background: #ffae42;
+    background: #ffff00;
 }
 
 /* Blue */
@@ -184,7 +184,7 @@ hr {
 
 /* Brown */
 .bin.glass {
-    background: #7b3f00;
+    background: #a52a2a;
 
 }
 
@@ -258,5 +258,6 @@ hr {
         height: 90px;
     }
 }
+
 
 
